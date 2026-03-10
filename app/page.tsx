@@ -1,16 +1,22 @@
+import FilterTabs from "../components/FilterTabs";
+import SearchBar from "../components/SearchBar";
 export default function Home() {
   return (
     <main className="min-h-screen max-w-md mx-auto flex flex-col relative pb-24">
-      
+      <FilterTabs />
+      <SearchBar />
       {/* Top Header - The Logo and Title */}
       <header className="flex items-center gap-3 pt-8 pb-4 px-6">
-        <div className="w-9 h-9 rounded-full bg-[#C48B96] text-white flex items-center justify-center font-bold text-xl">
-          L
-        </div>
-        <h1 className="text-xl font-bold tracking-wide text-[#4A4238]">
-          Lost & Found
-        </h1>
-      </header>
+  {/* Replacing the old circle with your logo */}
+  <img 
+    src="/logo.png" 
+    alt="Foundly Logo" 
+    className="w-10 h-10 rounded-full object-cover" 
+  />
+  <h1 className="text-xl font-bold tracking-wide text-[#4A4238]">
+    Foundly
+  </h1>
+</header>
 
       {/* Main Catchphrase */}
       <section className="mt-4 text-center px-6">
