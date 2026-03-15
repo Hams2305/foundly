@@ -41,13 +41,14 @@ export default async function Home() {
       <div className="px-6 mt-8 grid grid-cols-2 gap-4 pb-10">
         {items?.map((item) => (
           <ItemCard 
-            key={item.id}
-            type={item.type as "LOST" | "FOUND"} // Type casting to match our component
-            title={item.title}
-            description={item.description}
-            image={item.image_url}
-          />
-        ))}
+          key={item.id}
+          id={item.id} // Add this line!
+          type={item.type as "LOST" | "FOUND"}
+          title={item.title}
+          description={item.description}
+          image={item.image_url}
+        />
+      ))}
       </div>
       
     </main>
