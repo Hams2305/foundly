@@ -1,22 +1,23 @@
+import { supabase } from "./lib/supabase";
 import FilterTabs from "../components/FilterTabs";
 import SearchBar from "../components/SearchBar";
-export default function Home() {
+import ItemCard from "../components/ItemCard";
+
+export default async function Home() {
+  // Fetch data from Supabase
+  const { data: items } = await supabase.from("items").select("*");
+
   return (
-    <main className="min-h-screen max-w-md mx-auto flex flex-col relative pb-24">
-      <FilterTabs />
-      <SearchBar />
-      {/* Top Header - The Logo and Title */}
-      <header className="flex items-center gap-3 pt-8 pb-4 px-6">
-  {/* Replacing the old circle with your logo */}
-  <img 
-    src="/logo.png" 
-    alt="Foundly Logo" 
-    className="w-10 h-10 rounded-full object-cover" 
-  />
-  <h1 className="text-xl font-bold tracking-wide text-[#4A4238]">
-    Foundly
-  </h1>
-</header>
+    <main className="min-h-screen max-w-md mx-auto flex flex-col relative pb-24 bg-[#FDFBF7]">
+      
+      {/* Top Header with your Logo */}
+      <header className="flex items-center pt-8 pb-4 px-6">
+        <img 
+          src="/logo.png" 
+          alt="Foundly Logo" 
+          className="h-12 w-auto object-contain" 
+        />
+      </header>
 
       {/* Main Catchphrase */}
       <section className="mt-4 text-center px-6">
@@ -30,7 +31,24 @@ export default function Home() {
         </p>
       </section>
       
-      {/* We will add the Filter Tabs and Feed here next! */}
+      {/* Interactive Filter Tabs */}
+      <FilterTabs />
+
+      {/* Search Bar */}
+      <SearchBar />
+
+      {/* Dynamic Item Grid */}
+      <div className="px-6 mt-8 grid grid-cols-2 gap-4 pb-10">
+        {items?.map((item) => (
+          <ItemCard 
+            key={item.id}
+            type={item.type as "LOST" | "FOUND"} // Type casting to match our component
+            title={item.title}
+            description={item.description}
+            image={item.image_url}
+          />
+        ))}
+      </div>
       
     </main>
   );

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import AddItemForm from "./AddItemForm"; // Import the form you created
 
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isFormOpen, setIsFormOpen] = useState(false); // State to track if form is open
 
   return (
     <div className="mt-8 px-6 w-full">
@@ -11,14 +13,7 @@ export default function SearchBar() {
       <div className="flex items-center bg-white rounded-full p-1.5 pl-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-[#F1EAE2]">
         
         {/* Magnifying Glass Icon */}
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="h-5 w-5 text-[#8E867D]" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor" 
-          strokeWidth={2}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#8E867D]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
 
@@ -32,19 +27,18 @@ export default function SearchBar() {
         />
 
         {/* The Pink Add Button */}
-        <button className="w-10 h-10 flex-shrink-0 bg-[#C48B96] hover:bg-[#b07d87] text-white rounded-full flex items-center justify-center shadow-sm transition-colors">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-6 w-6" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor" 
-            strokeWidth={2}
-          >
+        <button 
+          onClick={() => setIsFormOpen(true)} // Clicking this opens the form!
+          className="w-10 h-10 flex-shrink-0 bg-[#C48B96] hover:bg-[#b07d87] text-white rounded-full flex items-center justify-center shadow-sm transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
           </svg>
         </button>
       </div>
+
+      {/* This shows the form only when isFormOpen is true */}
+      {isFormOpen && <AddItemForm onClose={() => setIsFormOpen(false)} />}
     </div>
   );
 }
